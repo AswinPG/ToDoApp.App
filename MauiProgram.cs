@@ -1,4 +1,7 @@
-﻿namespace ToDoApp;
+﻿using ToDoApp.ViewModels;
+using ToDoApp.Views;
+
+namespace ToDoApp;
 
 public static class MauiProgram
 {
@@ -13,6 +16,12 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		return builder.Build();
+		Routing.RegisterRoute(nameof(ToDoItemsListPage), typeof(ToDoItemsListPage));
+
+		builder.Services.AddTransient<ToDoItemsListPage>();
+		builder.Services.AddTransient<ToDoItemsListPageViewModel>();
+
+
+        return builder.Build();
 	}
 }

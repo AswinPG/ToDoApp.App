@@ -4,9 +4,10 @@ namespace ToDoApp.Views;
 
 public partial class ToDoItemsListPage : ContentPage
 {
-	public ToDoItemsListPage()
+	public ToDoItemsListPage(ToDoItemsListPageViewModel vm)
 	{
-		BindingContext = new ToDoItemsListPageViewModel();
+		BindingContext = vm;
+		//BindingContext = new ToDoItemsListPageViewModel();
 
         InitializeComponent();
 	}

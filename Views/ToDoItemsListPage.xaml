@@ -8,21 +8,15 @@
     Title="ToDoItemsListPage"
     x:DataType="vm:ToDoItemsListPageViewModel">
     <Grid x:Name="MainStack" RowDefinitions="Auto,*">
-        <VerticalStackLayout>
-            <Entry
-                Margin="10"
-                Placeholder="Enter Heading"
-                Text="{Binding NewToDoItem.Heading}" />
+        <VerticalStackLayout Padding="10" Spacing="10">
+            <Entry Placeholder="Enter Heading" Text="{Binding NewToDoItem.Heading}" />
             <Editor
-                Margin="10"
                 AutoSize="TextChanges"
                 Placeholder="Enter Description"
                 Text="{Binding NewToDoItem.Description}" />
-            <DatePicker
-                Margin="10"
-                Date="{Binding NewToDoItem.Date}"
-                HorizontalOptions="Center" />
-            <Button Command="{Binding AddCommand}" Text="Add ToDo" />
+            <DatePicker Date="{Binding NewToDoItem.Date}" HorizontalOptions="Center" />
+            <Button Command="{Binding AddToDoItemCommand}" Text="Add ToDo" />
+            <Button Command="{Binding NavigateCommand}" Text="Navigate" />
         </VerticalStackLayout>
 
 

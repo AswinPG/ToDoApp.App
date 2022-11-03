@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -8,45 +10,31 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ToDoApp.Models;
+using ToDoApp.Views;
 
 namespace ToDoApp.ViewModels
 {
-    public class ToDoItemsListPageViewModel : INotifyPropertyChanged
+    [ObservableObject]
+    public partial class ToDoItemsListPageViewModel
     {
-        ToDoItem toDo;
-        public ToDoItem NewToDoItem 
-        { 
-            get
-            {
-                return toDo;
-            } 
-            set
-            {
-                toDo = value;
-                NotifyPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        ToDoItem newToDoItem;
         public ObservableCollection<ToDoItem> ToDoItems { get; set; }
 
-
+        
         public ToDoItemsListPageViewModel()
         {
             ToDoItems = new ObservableCollection<ToDoItem>();
             NewToDoItem = new ToDoItem();
-            AddCommand = new Command(()=>AddToDoItem());
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        [RelayCommand]
+        public async Task Navigate()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            await Shell.Current.GoToAsync(nameof(ToDoItemsListPage));
         }
 
-
-        public ICommand AddCommand { get; }
-
-
-
+        [RelayCommand]
         public void AddToDoItem()
         {
             if (String.IsNullOrEmpty(NewToDoItem.Heading))
