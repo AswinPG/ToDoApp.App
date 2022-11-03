@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ToDoApp.Views.ToDoItemsListPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:ToDoApp.Models"
+    xmlns:vm="clr-namespace:ToDoApp.ViewModels"
+    Title="ToDoItemsListPage"
+    x:DataType="vm:ToDoItemsListPageViewModel">
+    <Grid x:Name="MainStack" RowDefinitions="Auto,*">
+        <VerticalStackLayout>
+            <Entry
+                Margin="10"
+                Placeholder="Enter Heading"
+                Text="{Binding NewToDoItem.Heading}" />
+            <Editor
+                Margin="10"
+                AutoSize="TextChanges"
+                Placeholder="Enter Description"
+                Text="{Binding NewToDoItem.Description}" />
+            <DatePicker
+                Margin="10"
+                Date="{Binding NewToDoItem.Date}"
+                HorizontalOptions="Center" />
+            <Button Command="{Binding AddCommand}" Text="Add ToDo" />
+        </VerticalStackLayout>
+
+
+
+
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding ToDoItems}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" x:DataType="models:ToDoItem">
+                        <Border Padding="20" StrokeThickness="2">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Heading}" />
+                                <Label Text="{Binding Description}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
